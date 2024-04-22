@@ -38,3 +38,11 @@ j
 :src/main/java/edu/kollozsolt/accounts/dto/CustomerDto.java,1\6\16ab7aaf438f92867d025614ea0fdd1ccc1369da
 j
 :src/main/java/edu/kollozsolt/accounts/dto/AccountsDto.java,8\c\8c41862b8d57838c83beba359f0fa9f35843262d
+l
+<src/main/java/edu/kollozsolt/accounts/entity/BaseEntity.java,1\8\18d3c56f8fe2ef469c7779ae924c289046554651
+o
+?src/main/java/edu/kollozsolt/accounts/audit/AuditAwareImpl.java,2\3\239d0dda27c6e44b7908e298fc9cdbb5e9df3acd
+n
+>src/main/java/edu/kollozsolt/accounts/AccountsApplication.java,e\5\e5f97a3c9bd44e1794335324e8250c7c461b795d
+{
+Ksrc/main/java/edu/kollozsolt/accounts/service/impl/AccountsServiceImpl.java,7\c\7c419c422f33061aa6955d2e333f808d7abb9b40
