@@ -46,3 +46,5 @@ n
 >src/main/java/edu/kollozsolt/accounts/AccountsApplication.java,e\5\e5f97a3c9bd44e1794335324e8250c7c461b795d
 {
 Ksrc/main/java/edu/kollozsolt/accounts/service/impl/AccountsServiceImpl.java,7\c\7c419c422f33061aa6955d2e333f808d7abb9b40
+v
+Fsrc/main/java/edu/kollozsolt/accounts/constants/AccountsConstants.java,7\3\733f06ec76f096108b510d0bb0b7294e4ad60655
