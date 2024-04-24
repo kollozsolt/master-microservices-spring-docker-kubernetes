@@ -13,8 +13,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
 @OpenAPIDefinition(
         info = @Info(
-                title = "Accounts microservice REST API Documentation",
-                description = "EasyBank Accounts microservice REST API Documentation",
+                title = "Cards microservice REST API Documentation",
+                description = "EasyBank Cards microservice REST API Documentation",
                 version = "v1",
                 contact = @Contact(
                         name = "Kollo Zsolt",
@@ -27,7 +27,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
                 )
         ),
         externalDocs = @ExternalDocumentation(
-                description = "EasyBank Accounts microservice REST API Documentation",
+                description = "EasyBank Cards microservice REST API Documentation",
                 url = "https://google.com"
         )
 )
