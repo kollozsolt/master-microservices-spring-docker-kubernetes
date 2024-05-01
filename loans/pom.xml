@@ -11,6 +11,7 @@
     <groupId>edu.kollozsolt</groupId>
     <artifactId>loans</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>loans</name>
     <description>loans</description>
     <properties>
@@ -68,6 +69,10 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+<!--                Usage: mvn spring-boot:build-image              -->
+                    <image>
+                        <name>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v1</name>
+                    </image>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
