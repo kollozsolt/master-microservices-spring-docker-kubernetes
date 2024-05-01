@@ -11,6 +11,7 @@
     <groupId>edu.kollozsolt</groupId>
     <artifactId>cards</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>cards</name>
     <description>cards</description>
     <properties>
@@ -68,6 +69,17 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+<!--            Usage: mvn compile jib:dockerBuild -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <to>
+                        <image>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v1</image>
+                    </to>
                 </configuration>
             </plugin>
         </plugins>
