@@ -44,6 +44,11 @@ public class CardsController {
     @Autowired
     private CardsContactInfoDto cardsContactInfoDto;
 
+    @Autowired
+    public CardsController(ICardsService cardService) {
+        this.iCardsService = cardService;
+    }
+
     @Operation(
             summary = "Create card REST API",
             description = "REST API to create new Card inside EasyBank"

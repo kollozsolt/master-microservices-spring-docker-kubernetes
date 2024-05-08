@@ -87,9 +87,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
 <!--                Usage: mvn spring-boot:build-image              -->
-                    <image>
-                        <name>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v1</name>
-                    </image>
+<!--                    <image>-->
+<!--                        <name>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v2</name>-->
+<!--                    </image>-->
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
