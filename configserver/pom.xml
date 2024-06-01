@@ -52,13 +52,13 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <plugin>
+                <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
                     <to>
-                        <image>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v2</image>
+                        <image>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v5</image>
                     </to>
                 </configuration>
             </plugin>

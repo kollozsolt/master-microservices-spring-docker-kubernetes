@@ -48,6 +48,10 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
@@ -107,7 +111,7 @@
                 <version>3.4.1</version>
                 <configuration>
                     <to>
-                        <image>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v4</image>
+                        <image>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v5</image>
                     </to>
                 </configuration>
             </plugin>

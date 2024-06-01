@@ -1,4 +1,16 @@
 services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      timeout: 10s
+      retries: 10
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   accountsdb:
     container_name: accountsdb
     ports:
@@ -30,7 +42,7 @@ services:
       service: microservice-db-config
 
   configserver:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/configserver:v4"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/configserver:v5"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -45,7 +57,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/eurekaserver:v4"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/eurekaserver:v5"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -65,7 +77,7 @@ services:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
   accounts:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/accounts:v4"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/accounts:v5"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -88,7 +100,7 @@ services:
       service: microservice-eurekaserver-config
 
   loans:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/loans:v4"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/loans:v5"
     container_name: loans-ms
     ports:
       - "8083:8083"
@@ -111,7 +123,7 @@ services:
       service: microservice-eurekaserver-config
 
 #  loans1:
-#    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/loans:v4"
+#    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/loans:v5"
 #    container_name: loans-ms1
 #    ports:
 #      - "8084:8083"
@@ -134,7 +146,7 @@ services:
 #      service: microservice-eurekaserver-config
 
   cards:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/cards:v4"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/cards:v5"
     container_name: cards-ms
     ports:
       - "8082:8082"
@@ -157,12 +169,16 @@ services:
       service: microservice-eurekaserver-config
 
   gatewayserver:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/gatewayserver:v4"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/gatewayserver:v5"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"
     environment:
       SPRING_APPLICATION_NAME: "gatewayserver"
+      SPRING_DATA_REDIS_CONNECTION-TIMEOUT: 2s
+      SPRING_DATA_REDIS_REDIS_HOST: redis
+      SPRING_DATA_REDIS_REDIS_PORT: 6379
+      SPRING_DATA_REDIS_TIMEOUT: 1s
     depends_on:
       accounts:
         condition: service_healthy
@@ -171,6 +187,8 @@ services:
       cards:
         condition: service_healthy
       configserver:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     extends:
       file: common-config.yml

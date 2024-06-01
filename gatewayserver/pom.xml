@@ -34,6 +34,14 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -71,7 +79,7 @@
                 <version>3.4.1</version>
                 <configuration>
                     <to>
-                        <image>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v4</image>
+                        <image>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v5</image>
                     </to>
                 </configuration>
             </plugin>

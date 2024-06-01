@@ -12,6 +12,7 @@ import edu.kollozsolt.accounts.service.ICustomerService;
 import edu.kollozsolt.accounts.service.client.CardsFeignClient;
 import edu.kollozsolt.accounts.service.client.LoansFeignClient;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,9 @@ public class CustomerServiceImpl implements ICustomerService {
 
     private AccountsRepository accountsRepository;
     private CustomerRepository customerRepository;
+    @Qualifier("edu.kollozsolt.accounts.service.client.CardsFeignClient")
     private CardsFeignClient cardsFeignClient;
+    @Qualifier("edu.kollozsolt.accounts.service.client.LoansFeignClient")
     private LoansFeignClient loansFeignClient;
 
     @Override
@@ -40,8 +43,13 @@ public class CustomerServiceImpl implements ICustomerService {
         ResponseEntity<LoansDto> loansDtoResponseEntity = loansFeignClient.fetchLoanDetails(correlationId, mobileNumber);
         ResponseEntity<CardsDto> cardsDtoResponseEntity = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
 
-        customerDetailsDto.setLoansDto(loansDtoResponseEntity.getBody());
-        customerDetailsDto.setCardsDto(cardsDtoResponseEntity.getBody());
+        if (null != loansDtoResponseEntity) {
+            customerDetailsDto.setLoansDto(loansDtoResponseEntity.getBody());
+        }
+
+        if (null != cardsDtoResponseEntity) {
+            customerDetailsDto.setCardsDto(cardsDtoResponseEntity.getBody());
+        }
 
         return customerDetailsDto;
     }
