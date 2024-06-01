@@ -67,7 +67,7 @@ public class LoansController {
             )
     })
     @PostMapping("/create")
-    public ResponseEntity<ResponseDto> createCard(
+    public ResponseEntity<ResponseDto> createLoan(
             @Valid
             @RequestParam
             @Pattern(regexp="(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
@@ -96,7 +96,7 @@ public class LoansController {
             )
     })
     @GetMapping("/fetch")
-    public ResponseEntity<LoansDto> fetchCardDetails(
+    public ResponseEntity<LoansDto> fetchLoanDetails(
             @RequestParam
             @Pattern(regexp="(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
             String mobileNumber) {
@@ -106,7 +106,7 @@ public class LoansController {
 
     @Operation(
             summary = "Update loan Details REST API",
-            description = "REST API to update Loan details based on a card number"
+            description = "REST API to update Loan details based on a loan number"
     )
     @ApiResponses({
             @ApiResponse(
@@ -126,7 +126,7 @@ public class LoansController {
             )
     })
     @PutMapping("/update")
-    public ResponseEntity<ResponseDto> updateCardDetails(@Valid @RequestBody LoansDto loansDto) {
+    public ResponseEntity<ResponseDto> updateLoanDetails(@Valid @RequestBody LoansDto loansDto) {
         boolean isUpdated = iLonasService.updateLoan(loansDto);
         if(isUpdated) {
             return ResponseEntity
@@ -161,7 +161,7 @@ public class LoansController {
             )
     })
     @DeleteMapping("/delete")
-    public ResponseEntity<ResponseDto> deleteCardDetails(
+    public ResponseEntity<ResponseDto> deleteLoanDetails(
             @RequestParam
             @Pattern(regexp="(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
             String mobileNumber) {
