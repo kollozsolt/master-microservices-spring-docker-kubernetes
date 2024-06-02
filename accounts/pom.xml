@@ -73,6 +73,15 @@
             <version>2.5.0</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -111,7 +120,7 @@
                 <version>3.4.1</version>
                 <configuration>
                     <to>
-                        <image>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v5</image>
+                        <image>r.edu.codespring.ro/training-assets/kubernetes-fozocskek/${project.artifactId}:v6</image>
                     </to>
                 </configuration>
             </plugin>
