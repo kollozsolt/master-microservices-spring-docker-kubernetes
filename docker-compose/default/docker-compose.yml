@@ -1,4 +1,20 @@
 services:
+  rabbit:
+    image: rabbitmq:3.12-management
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   redis:
     image: redis
     ports:
@@ -42,7 +58,7 @@ services:
       service: microservice-db-config
 
   configserver:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/configserver:v5"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/configserver:v6"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -57,7 +73,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/eurekaserver:v5"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/eurekaserver:v6"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -77,7 +93,7 @@ services:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
   accounts:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/accounts:v5"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/accounts:v6"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -90,17 +106,20 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "accounts"
       SPRING_DATASOURCE_URL: "jdbc:mysql://accountsdb:3306/accountsdb"
+      SPRING_RABBITMQ_HOST: "rabbit"
     depends_on:
       accountsdb:
         condition: service_healthy
       configserver:
+        condition: service_healthy
+      rabbit:
         condition: service_healthy
     extends:
       file: common-config.yml
       service: microservice-eurekaserver-config
 
   loans:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/loans:v5"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/loans:v6"
     container_name: loans-ms
     ports:
       - "8083:8083"
@@ -123,7 +142,7 @@ services:
       service: microservice-eurekaserver-config
 
 #  loans1:
-#    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/loans:v5"
+#    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/loans:v6"
 #    container_name: loans-ms1
 #    ports:
 #      - "8084:8083"
@@ -146,7 +165,7 @@ services:
 #      service: microservice-eurekaserver-config
 
   cards:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/cards:v5"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/cards:v6"
     container_name: cards-ms
     ports:
       - "8082:8082"
@@ -169,7 +188,7 @@ services:
       service: microservice-eurekaserver-config
 
   gatewayserver:
-    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/gatewayserver:v5"
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/gatewayserver:v6"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"
@@ -193,6 +212,18 @@ services:
     extends:
       file: common-config.yml
       service: microservice-eurekaserver-config
+
+  message:
+    image: "r.edu.codespring.ro/training-assets/kubernetes-fozocskek/message:v6"
+    container_name: message_ms
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    environment:
+      SPRING_RABBITMQ_HOST: "rabbit"
+    extends:
+      service: network-deploy-service
+      file: common-config.yml
 
 networks:
   easybank:
