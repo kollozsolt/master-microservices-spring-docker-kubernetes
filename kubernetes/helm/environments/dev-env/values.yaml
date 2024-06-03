@@ -1,0 +1,8 @@
+global:
+  configMapName: easybankdev-configmap
+  activeProfile: default
+  configServerUrl: configserver:http://configserver:8071/
+  eurekaServerUrl: http://eurekaserver:8070/eureka/
+  springDatasourceUsername: root
+  springDatasourcePassword: root
+  kafkaBrokerUrl: kafka-controller-0.kafka-controller-headless.default.svc.cluster.local:9092

@@ -1,0 +1,28 @@
+gitlab token: glpat-vVYz1ysxF7ixkzcXLsTJ
+kubectl create secret docker-registry registry-credential --docker-server=r.edu.codespring.ro --docker-username=gitlab-ci-token --docker-password=glpat-vVYz1ysxF7ixkzcXLsTJ
+
+Create Dashboard:
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/ 
+helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
+kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443
+
+Login:
+kubectl.exe apply -f dashboard-admin.yml
+kubectl.exe apply -f dashboar-rolebinding.yml
+kubectl.exe -n kubernetes-dashboard create token admin-user
+
+Secret
+kubectl apply -f secret.yml
+kubectl.exe get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"} | base64 -d 
+eyJhbGciOiJSUzI1NiIsImtpZCI6IkxIWGx3VmJuNWlnQjRlaUktLU9ud3AyYWZIY2pLS2lTOGFPSjZRTjFOVzQifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI5ZGRjOGI2ZC02ZmQzLTQ4MTAtOTQ4Yy0xMTQxMzIzZjU0MWMiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.nYRHu6_m_2uW_ZoQQt6_DLpQyMEmoDjDdRqMDr0ZeAFOJ8WEwYJnfGVr1KNnJOIOhjJ6ffKDSzpCUB9PBbYcUdoga4rm7GHPfywGqUn5EoVH1Eboq516Rm3LLKhS3ErB-pkiCZzANYOVXskfJf2vkgQ5EP4_OJr6R06o77mYZJt2oJssrYNa_1ffT41K5X_w2HRBCrBOF49oTKhHSglFOt1hZ76hiKbdlNOOV9qINMtxLf5jixQRd7A9ZIbo95DiZF7IFhm75mHPrGsEh8eUzJE_RU6Wzhn0gHbIxXSsrdGUak_2iBsfPNl50AT9T_NcsHTuiUwB8oLw3csQ7eSbmw
+
+helm
+helm create <name>
+helm dependencies build - environment/dev-env
+helm template .
+
+helm install easybank prod-env
+helm install kafka kafka
+helm upgrade easybank prod-env
+helm history easybank
+helm uninstall easybank`

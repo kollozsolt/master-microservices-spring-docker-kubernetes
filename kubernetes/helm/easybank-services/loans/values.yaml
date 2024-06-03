@@ -1,0 +1,31 @@
+deploymentName: loans-deployment
+serviceName: loans
+appLabel: loans
+appName: loans
+
+replicaCount: 1
+
+image:
+  repository: r.edu.codespring.ro/training-assets/kubernetes-fozocskek/loans
+  tag: h2
+
+containerPort: 8083
+
+service:
+  type: ClusterIP
+  port: 8083
+  targetPort: 8083
+
+appname_enabled: true
+profile_enabled: true
+config_enabled: true
+eureka_enabled: true
+resourceserver_enabled: false
+otel_enabled: false
+kafka_enabled: false
+datasource: true
+
+datasourceUrl: jdbc:h2:mem:testdb
+# datasourceUrl: jdbc:mysql://accountsdb:3306/mysql
+
+secretName: registry-credential

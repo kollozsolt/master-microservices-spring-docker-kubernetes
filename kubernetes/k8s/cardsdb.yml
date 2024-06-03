@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cardsdb
+  labels:
+    app: cardsdb
+spec:
+  ports:
+    - port: 3306
+  clusterIP: None
+  selector:
+    app: cardsdb
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cardsdb
+spec:
+  selector:
+    matchLabels:
+      app: cardsdb
+  serviceName: "cardsdb"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: cardsdb
+    spec:
+      containers:
+      - name: cardsdb
+        image: mysql:8.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "root"
+        ports:
+        - containerPort: 3306
+          name: cardsdb 
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-persistent-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

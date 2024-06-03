@@ -1,0 +1,31 @@
+deploymentName: cards-deployment
+serviceName: cards
+appLabel: cards
+appName: cards
+
+replicaCount: 1
+
+image:
+  repository: r.edu.codespring.ro/training-assets/kubernetes-fozocskek/cards
+  tag: h2
+
+containerPort: 8082
+
+service:
+  type: ClusterIP
+  port: 8082
+  targetPort: 8082
+
+appname_enabled: true
+profile_enabled: true
+config_enabled: true
+eureka_enabled: true
+resourceserver_enabled: false
+otel_enabled: false
+kafka_enabled: false
+datasource: true
+
+datasourceUrl: jdbc:h2:mem:testdb
+# datasourceUrl: jdbc:mysql://accountsdb:3306/mysql
+
+secretName: registry-credential

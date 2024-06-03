@@ -1,0 +1,31 @@
+deploymentName: accounts-deployment
+serviceName: accounts
+appLabel: accounts
+appName: accounts
+
+replicaCount: 1
+
+image:
+  repository: r.edu.codespring.ro/training-assets/kubernetes-fozocskek/accounts
+  tag: h2
+
+containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+appname_enabled: true
+profile_enabled: true
+config_enabled: true
+eureka_enabled: true
+resourceserver_enabled: false
+otel_enabled: false
+kafka_enabled: true
+datasource: true
+
+datasourceUrl: jdbc:h2:mem:testdb
+# datasourceUrl: jdbc:mysql://accountsdb:3306/mysql
+
+secretName: registry-credential
