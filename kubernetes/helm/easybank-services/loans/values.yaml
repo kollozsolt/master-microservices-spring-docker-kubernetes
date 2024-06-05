@@ -24,8 +24,10 @@ resourceserver_enabled: false
 otel_enabled: false
 kafka_enabled: false
 datasource: true
+serviceType: true
 
-datasourceUrl: jdbc:h2:mem:testdb
-# datasourceUrl: jdbc:mysql://accountsdb:3306/mysql
+# datasourceUrl: jdbc:h2:mem:testdb
+datasourceSecret: loansdb-mysql
+datasourceUrl: jdbc:mysql://loansdb-mysql.default.svc.cluster.local:3306/my_database
 
 secretName: registry-credential

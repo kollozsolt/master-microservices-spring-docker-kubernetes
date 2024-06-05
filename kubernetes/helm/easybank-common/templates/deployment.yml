@@ -47,6 +47,13 @@ spec:
               name: {{ .Values.global.configMapName }}
               key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
         {{- end }}
+        {{- if .Values.resouceserver_enabled }}
+        - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI
+          valueFrom: 
+            configMapKeyRef:
+              name: {{ .Values.global.configMapName }}
+              key: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI
+        {{- end }}
         {{- if .Values.otel_enabled }}
         - name: JAVA_TOOL_OPTIONS
           valueFrom: 
@@ -76,16 +83,13 @@ spec:
         {{- if .Values.datasource }}
         - name: SPRING_DATASOURCE_URL
           value: {{ .Values.datasourceUrl }}
-        - name: SPRING_DATASOURCE_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Values.global.configMapName }}
-              key: SPRING_DATASOURCE_USERNAME
         - name: SPRING_DATASOURCE_PASSWORD
           valueFrom:
-            configMapKeyRef:
-              name: {{ .Values.global.configMapName }}
-              key: SPRING_DATASOURCE_PASSWORD
+            secretKeyRef:
+              name: {{ .Values.datasourceSecret }}
+              key: mysql-root-password
+        - name: SPRING_DATASOURCE_USERNAME
+          value: root
         {{- end }}
       imagePullSecrets:
         - name: {{ .Values.secretName }}

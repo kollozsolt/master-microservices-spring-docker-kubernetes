@@ -24,5 +24,6 @@ resourceserver_enabled: false
 otel_enabled: false
 kafka_enabled: false
 datasource: false
+serviceType: true
 
 secretName: registry-credential
