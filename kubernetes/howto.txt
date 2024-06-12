@@ -42,8 +42,6 @@ helm install accountsdb oci://registry-1.docker.io/bitnamicharts/mysql
 helm install cardsdb oci://registry-1.docker.io/bitnamicharts/mysql
 helm install loansdb oci://registry-1.docker.io/bitnamicharts/mysql
 
-
-
 kafka-topics.sh --bootstrap-server localhost:9092 --list
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic communication-sent --from-beginning
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic communication-sent --from-beginning
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic send-communication --from-beginning
